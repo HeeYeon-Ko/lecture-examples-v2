@@ -26,10 +26,35 @@ public class CartItem {
     private Integer quantity;
 
     public static CartItem create(Long productId, int quantity) {
-        CartItem cartItem = new CartItem();
-        cartItem.productId = productId;
-        cartItem.quantity = quantity;
-        return cartItem;
+        return new CartItem(productId, quantity);
+    }
+
+    private CartItem(Long productId, Integer quantity) {
+        validateQuantity(quantity);
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
+    // 수량 더하기
+    void addQuantity(int amount) {
+        validateQuantity(this.quantity + amount);
+        this.quantity += amount;
+    }
+
+    // 수량 덮어쓰기
+    void changeQuantity(int newQuantity) {
+        validateQuantity(newQuantity);
+        this.quantity = newQuantity;
+    }
+
+    private void validateQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("수량은 1개 이상이어야 합니다. 입력값: " + quantity);
+        }
+    }
+
+    boolean hasProduct(Long productId) {
+        return this.productId.equals(productId);
     }
 
     void assignCart(Cart cart) {

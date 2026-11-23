@@ -30,7 +30,23 @@ public class Payment {
         return payment;
     }
 
-    public void changeStatus(PaymentStatus status) {
-        this.status = status;
+    public void approve(){
+        requireReady();
+        this.status = PaymentStatus.PAID;
+    }
+
+    public void fail(){
+        requireReady();
+        this.status = PaymentStatus.FAILED;
+    }
+
+    /*
+        - approve(), fail()에서 공통으로 필요한 로직이기에 별도 메서드로 분리
+        - approve(), fail() 내부에서만 쓰이기에 private으로 선언
+     */
+    private void requireReady(){
+        if(this.status != PaymentStatus.READY){
+            throw new IllegalStateException("READY 상태에서만 결제 상태를 변경할 수 있습니다. status= " + this.status);
+        }
     }
 }
