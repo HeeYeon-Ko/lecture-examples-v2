@@ -3,6 +3,7 @@ package com.growmighty.lectures.firstday.tangledmonolith;
 import com.growmighty.lectures.firstday.tangledmonolith.order.domain.Order;
 import com.growmighty.lectures.firstday.tangledmonolith.order.domain.OrderItem;
 import com.growmighty.lectures.firstday.tangledmonolith.order.domain.OrderRepository;
+import com.growmighty.lectures.firstday.tangledmonolith.order.infrastructure.OrderRepositoryAdapter;
 import com.growmighty.lectures.firstday.tangledmonolith.product.domain.Product;
 import com.growmighty.lectures.firstday.tangledmonolith.seller.domain.Seller;
 import com.growmighty.lectures.firstday.tangledmonolith.user.domain.User;
@@ -15,10 +16,12 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+@Import(OrderRepositoryAdapter.class)
 class OrderRepositoryTests {
 
     @Autowired
