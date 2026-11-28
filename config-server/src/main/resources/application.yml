@@ -11,4 +11,4 @@ spring:
           default-label: main
 
 server:
-  port: 8888
+  port: 8888  # Config Server 관례 포트
